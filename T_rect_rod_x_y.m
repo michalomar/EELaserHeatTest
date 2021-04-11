@@ -49,7 +49,7 @@ else
 end
       
 %  Temperature in kth order (see the references for details)
- for k = 1:1:120
+ for k = 1:1:1600
       mu=2.0*k*pi/b;   
       wA(2*K)=1.0d0;
       wB(2*K)=((mu*lambda(2*K)+alpha)/(mu*lambda(2*K)-alpha))*exp(2.0d0*mu*ytop);
@@ -77,10 +77,15 @@ end
       if (mod(nocurrentl,2) == 0)
          T=T+A2K*(wA(nocurrentl)*exp(mu*y)+wB(nocurrentl)*exp(-mu*y))*cos(mu*x);
       else
-          T=T+((wA(2)+wB(2))/(wA(1)+wB(1)))*A2K*(wA(nocurrentl)*exp(mu*y)+wB(...
+          %poni¿ej celowe ograniczenie wg. Zeszyt dn. 7.04.21, aby cz³on
+          %exp(-mu*y) nie "wybucha³ " do Inf dla du¿ych ujemnych y
+          if (k < -705.0*b/(2.0*pi*y))  
+              T=T+((wA(2)+wB(2))/(wA(1)+wB(1)))*A2K*(wA(nocurrentl)*exp(mu*y)+wB(...
               nocurrentl)*exp(-mu*y))*cos(mu*x);
+          else
+              T=T+((wA(2)+wB(2))/(wA(1)+wB(1)))*A2K*wA(nocurrentl)*exp(mu*y)*cos(mu*x);
+          end
       end
-      
  end
  varargout{1} = T;
 end

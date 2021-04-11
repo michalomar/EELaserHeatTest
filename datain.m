@@ -57,7 +57,7 @@ lambda = zeros([1 maxnooflayers]);
  %******** heat source (laser active layer) **************
  w = 20.0e0; %width [micron] of the  infinitely thin stripe placed in plane y=0 
  L=3000.0e0; %resonator length [micron] of the  infinitely thin stripe placed in plane y=0 
- current = 2.0;
+ current = 2.0; 
  voltage = 2.0;
  Pout = 1.68;     
 J = (voltage*current - Pout)/(w*L); %power density [W/micron^2]
@@ -85,7 +85,7 @@ J = (voltage*current - Pout)/(w*L); %power density [W/micron^2]
  lambda(13)=384.00e-6; % bottom layer thermal conductivity [W/(micron*K)]
     
  b=5000.0e0; %width [microns] of the rectangular rod (laser structure)
- dsur = 1.0e0; %gruboœæ warstwy grzej¹cej przy zwierciadle [micron]
+ dsur = 2.7e0; %gruboœæ warstwy grzej¹cej przy zwierciadle [micron]
  factor = 2.0*dsur/L; %this value provides g_a = g_m (i.e. uniform heating along the resonator)
  
  % ********END of geometry and parameters***************
